@@ -24,10 +24,7 @@ fn serialize_test() {
 
 #[test]
 fn deserialize_test() {
-    serde_json::from_str::<MyVersion>(r#""3.1.5""#).unwrap();
-    serde_json::from_str::<MyVersion>(r#""3.1.4""#).unwrap();
-    assert!(matches!(
-        serde_json::from_str::<MyVersion>(r#""2.1.7""#),
-        Err(_)
-    ));
+    assert!(serde_json::from_str::<MyVersion>(r#""3.1.5""#).is_ok());
+    assert!(serde_json::from_str::<MyVersion>(r#""3.1.4""#).is_ok());
+    assert!(serde_json::from_str::<MyVersion>(r#""2.1.7""#).is_err(),);
 }
