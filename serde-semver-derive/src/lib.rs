@@ -6,9 +6,13 @@ use syn::{
 };
 
 struct UnitStruct {
+    #[allow(dead_code)]
+    vis: syn::Visibility,
     attrs: Vec<syn::Attribute>,
+    #[allow(dead_code)]
     struct_token: Token![struct],
     name: syn::Ident,
+    #[allow(dead_code)]
     semi_token: Token![;],
 }
 
@@ -16,6 +20,7 @@ impl Parse for UnitStruct {
     fn parse(input: ParseStream) -> Result<Self, syn::Error> {
         Ok(UnitStruct {
             attrs: input.call(syn::Attribute::parse_outer)?,
+            vis: input.parse()?,
             struct_token: input.parse()?,
             name: input.parse()?,
             semi_token: input.parse()?,
