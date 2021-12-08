@@ -1,11 +1,5 @@
-[workspace]
-members = [
-    "serde-semver-derive",
-]
-
-
 [package]
-name = "serde-semver"
+name = "serde-semver-derive"
 description = "Serde-compatible version checker"
 version = "0.1.0"
 authors = ["jerry73204 <jerry73204@gmail.com>"]
@@ -16,13 +10,11 @@ homepage = "https://github.com/jerry73204/serde-semver"
 readme = "README.md"
 license = "MIT"
 
+[lib]
+proc-macro = true
+
 [dependencies]
 proc-macro2 = "1.0.33"
 quote = "1.0.10"
 syn = "1.0.82"
-serde = { version = "1.0.130", features = ["derive"] }
 semver = { version = "1.0.4", features = ["serde"] }
-serde-semver-derive = { version = "0.1.0", path = "serde-semver-derive" }
-
-[dev-dependencies]
-serde_json = "1.0.69"
