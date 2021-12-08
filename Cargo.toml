@@ -7,7 +7,7 @@ members = [
 [package]
 name = "serde-semver"
 description = "Serde-compatible version checker"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["jerry73204 <jerry73204@gmail.com>"]
 edition = "2021"
 documentation = "https://docs.rs/serde-semver/"
