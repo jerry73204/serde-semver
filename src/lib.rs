@@ -21,7 +21,7 @@
 //! use serde_semver::SemverReq;
 //! use std::path::PathBuf;
 //!
-//! // Declare the checker type that asserts '3.1.4'
+//! // Declare the vertion type
 //! #[derive(SemverReq)]
 //! #[version("3.1.4")]
 //! struct MyVersion;

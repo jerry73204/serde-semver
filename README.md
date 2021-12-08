@@ -1,26 +1,27 @@
 # serde-semver: Serde-compatible version checker
 
-The crate lets you build a version checker using `declare_version` macro.
-It is useful to create a versioned configuration with a version number audited during deserialization.
+[API doc](https://docs.rs/serde-semver/)
 
-## Usage
-
-For example, declare a `MyVersion` checker with the semver requirement `^3.5.11`.
+This crate provides a derive macro `SemverReq` to build a _versioned_ marker type.
+For example, it assocates the type with version "3.1.4".
 
 ```rust
-serde_semver::declare_version!(MyVersion, 3, 5, 11);
+#[derive(SemverReq)]
+#[version("3.1.4")]
+struct MyVersion;
 ```
+The marker type works as a version checker during deserialization. In this example, the marker verifies whether the deserialized JSON text is is compatible with version "3.1.4". For example, "3.1.3" and "3.1.0" are valid versions, but "3.2.0" and "2.7.0" are not.
 
-We can embed it in the configuration struct. In the following code, it audits the version number
-in the JSON text.
 
 ```rust
 use semver::Version;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
+use serde_semver::SemverReq;
 
-// Declare the checker type that asserts '3.5.11'
-serde_semver::declare_version!(MyVersion, 3, 5, 11);
+#[derive(SemverReq)]
+#[version("3.1.4")]
+struct MyVersion;
 
 // An example configuration with version tag
 #[derive(Serialize, Deserialize)]
@@ -30,28 +31,25 @@ struct Config {
     pub output_file: PathBuf,
 }
 
-// The version number is audited during deserialization.
+// The version is audited during deserialization.
 let config: Config = serde_json::from_str(
     r#"{
-  "version": "3.5.12",
+  "version": "3.1.4",
   "input_file": "input.txt",
   "output_file": "output.txt"
 }"#,
 )
 .unwrap();
 
-// The original version is recovered after serialization.
+// The version is recovered after serialization.
 assert_eq!(
     serde_json::to_string_pretty(&config).unwrap(),
     r#"{
-  "version": "3.5.12",
+  "version": "3.1.4",
   "input_file": "input.txt",
   "output_file": "output.txt"
 }"#,
 );
-
-// Besides deserialization, the version tag can also be created from scratch.
-let my_ver = MyVersion::new(Version::new(3, 5, 11)).unwrap();
 ```
 
 ## License
