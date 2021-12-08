@@ -1,13 +1,12 @@
 [package]
 name = "serde-semver-derive"
-description = "Serde-compatible version checker"
+description = "Derive macro for serde-compatible version checker"
 version = "0.1.0"
 authors = ["jerry73204 <jerry73204@gmail.com>"]
 edition = "2021"
 documentation = "https://docs.rs/serde-semver/"
 repository = "https://github.com/jerry73204/serde-semver.git"
 homepage = "https://github.com/jerry73204/serde-semver"
-readme = "README.md"
 license = "MIT"
 
 [lib]
