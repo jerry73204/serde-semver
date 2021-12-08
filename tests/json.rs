@@ -1,8 +1,4 @@
 use serde_semver::SemverReq;
-// use semver::Version;
-// use serde_semver::declare_version;
-
-// declare_version!(MyVersion, 3, 1, 4);
 
 #[derive(SemverReq)]
 #[version("3.1.4")]
